@@ -1,0 +1,6 @@
+framework module LYSafeKeyboard {
+  umbrella header "LYSafeKeyboard-umbrella.h"
+
+  export *
+  module * { export * }
+}

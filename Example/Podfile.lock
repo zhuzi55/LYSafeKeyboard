@@ -1,0 +1,16 @@
+PODS:
+  - LYSafeKeyboard (0.3.0)
+
+DEPENDENCIES:
+  - LYSafeKeyboard (from `../`)
+
+EXTERNAL SOURCES:
+  LYSafeKeyboard:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  LYSafeKeyboard: e14e2c7805ad4c6910953651528483575b1ce364
+
+PODFILE CHECKSUM: 6ce9bc1fcb707c5e4834faa0d3b20661c5adc4b5
+
+COCOAPODS: 1.11.2

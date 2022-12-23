@@ -1,0 +1,27 @@
+{
+  "name": "LYSafeKeyboard",
+  "version": "0.3.0",
+  "summary": "description of LYSafeKeyboard.",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "https://github.com/liyz/LYSafeKeyboard",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "liyz": ""
+  },
+  "source": {
+    "git": "https://github.com/liyz/LYSafeKeyboard.git",
+    "tag": "0.3.0"
+  },
+  "platforms": {
+    "ios": "9.0"
+  },
+  "source_files": "LYSafeKeyboard/Classes/**/*",
+  "resource_bundles": {
+    "LYSafeKeyboard": [
+      "LYSafeKeyboard/Assets/*.png"
+    ]
+  }
+}
