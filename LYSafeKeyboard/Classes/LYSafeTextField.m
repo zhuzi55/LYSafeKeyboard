@@ -74,7 +74,7 @@
     [self.passWord appendString:self.text];
 }
 
-//点击clearBtn清空
+/// 点击clearBtn清空
 -(void)textFiledEditingChanged{
     NSUInteger loc = self.passWord.length;
     if (loc == 0){

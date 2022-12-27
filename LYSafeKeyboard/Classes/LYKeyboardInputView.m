@@ -326,7 +326,7 @@
 
 // 切换字母数字
 - (void)changeNum:(UIButton *)btn {
-    NSLog(@"切换字母数字");
+//    NSLog(@"切换字母数字");
     self.isSymbolSelect = NO;
     [self setupTopNumButtonsWithImage:[self nomImage:YES] highImage:[self nomImage:NO]];
     [self setupBottomNumButtonsWithImage:[self nomImage:NO] highImage:[self nomImage:YES]];
@@ -341,7 +341,7 @@
         return;
     }
     self.isSymbolSelect = !self.isSymbolSelect;
-    NSLog(@"切换字符");
+//    NSLog(@"切换字符");
     [self setupTopSymbolButtonsWithImage:[self nomImage:YES] highImage:[self nomImage:NO]];
     [self setupBottomButtonsWithImage:[self nomImage:NO] highImage:[self nomImage:YES]];
     [self layoutSubviewSybol];
@@ -349,7 +349,7 @@
 
 // 切换大小写
 - (void)changeLetter {
-    NSLog(@"切换大小写");
+//    NSLog(@"切换大小写");
     self.isSymbolSelect = NO;
     [self setupTopButtonsWithImage:[self nomImage:YES] highImage:[self nomImage:NO] isLowercase:self.shiftChange];
     [self setupBottomButtonsWithImage:[self nomImage:NO] highImage:[self nomImage:YES]];
@@ -538,7 +538,7 @@
             topButton.width = topBtnW;
             topButton.height = topBtnH;
             
-            NSLog(@"%@",topButton.currentTitle);
+//            NSLog(@"%@",topButton.currentTitle);
         }
         
         if (i > 23) {
@@ -550,7 +550,7 @@
             buttonZero.width      = topBtnW;
             buttonZero.height     = topBtnH;
             
-            NSLog(@"%@",buttonZero.currentTitle);
+//            NSLog(@"%@",buttonZero.currentTitle);
             
             // 符号、文字及删除按钮的位置
             self.deleteBtn.x        = 11 *(topBtnW +colMargin) + leftMargin ;

@@ -25,9 +25,9 @@ NS_ASSUME_NONNULL_BEGIN
 @interface LYSafeTextField : UITextField
 
 @property (nonatomic, weak) id<LYSafeTextFieldDelegate> safeDelegate;
-//英文字母是否按正常键盘顺序排列 默认NO(乱序排列)
+/// 英文字母是否按正常键盘顺序排列 默认NO(乱序排列)
 @property (nonatomic, assign) BOOL letterIsOrder;
-//符号是否按照正常顺序排列 默认NO(乱序排列)
+/// 符号是否按照正常顺序排列 默认NO(乱序排列)
 @property (nonatomic, assign) BOOL symbolIsOrder;
 
 - (instancetype)init;

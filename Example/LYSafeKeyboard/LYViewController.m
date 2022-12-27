@@ -22,27 +22,30 @@
 	
     self.view.backgroundColor = [UIColor yellowColor];
     
-    LYSafeTextField *tf = [[LYSafeTextField alloc] initWithFrame:CGRectMake(0, 100, 300, 50)];
-    tf.backgroundColor = [UIColor whiteColor];
-    tf.safeDelegate = self;
-    [self.view addSubview:tf];
+    [self creatUI];
     
 }
 
+/// 创建视图
+-(void)creatUI{
+    
+    LYSafeTextField *tf = [[LYSafeTextField alloc] initWithFrame:CGRectMake(0, 0, 300, 50)];
+    tf.center = self.view.center;
+    tf.backgroundColor = [UIColor whiteColor];
+//    tf.clearButtonMode = UITextFieldViewModeAlways;
+//    tf.secureTextEntry = YES;
+    tf.safeDelegate = self;
+    [self.view addSubview:tf];
+}
+
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
-    NSLog(@"==");
+    NSLog(@"touchesBegan ==");
     [self.view endEditing:YES];
 }
 
+#pragma mark - 输入框回调事件
 - (void)textFiledChangedWithText:(NSString *)text{
-    NSLog(@"输入框 == %@", text);
-}
-
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    NSLog(@"输入框内容 == %@", text);
 }
 
 @end
