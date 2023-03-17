@@ -35,6 +35,7 @@
 //    tf.clearButtonMode = UITextFieldViewModeAlways;
 //    tf.secureTextEntry = YES;
     tf.safeDelegate = self;
+    tf.safeKeyboardType = LYSafeKeyboardTypeIDCard;
     [self.view addSubview:tf];
 }
 

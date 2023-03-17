@@ -9,6 +9,7 @@
 
 #import "UIView+LYExtension.h"
 #import "LYKeyboardAccessoryView.h"
+#import "LYKeyboardTool.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -33,9 +34,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) BOOL letterIsOrder;
 //符号是否按照正常顺序排列 默认NO(乱序排列)
 @property (nonatomic, assign) BOOL symbolIsOrder;
+//键盘类型
+@property (nonatomic, assign) LYSafeKeyboardType safeKeyboardType;
 
 //- (instancetype)initWithFrame:(CGRect)frame letterIsOrder:(BOOL)letterIsOrder;
-- (instancetype)initWithFrame:(CGRect)frame letterIsOrder:(BOOL)letterIsOrder symbolIsOrder:(BOOL)symbolIsOrder;
+- (instancetype)initWithFrame:(CGRect)frame letterIsOrder:(BOOL)letterIsOrder symbolIsOrder:(BOOL)symbolIsOrder safeKeyboardType:(LYSafeKeyboardType)safeKeyboardType;
 
 @end
 

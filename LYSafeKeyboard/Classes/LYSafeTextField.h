@@ -7,6 +7,8 @@
 
 #import <UIKit/UIKit.h>
 
+#import "LYKeyboardTool.h"
+
 NS_ASSUME_NONNULL_BEGIN
 
 @class LYSafeTextField;
@@ -29,6 +31,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) BOOL letterIsOrder;
 /// 符号是否按照正常顺序排列 默认NO(乱序排列)
 @property (nonatomic, assign) BOOL symbolIsOrder;
+/// 键盘类型 默认或身份证方式
+@property (nonatomic, assign) LYSafeKeyboardType safeKeyboardType;
+
 
 - (instancetype)init;
 - (instancetype)initWithFrame:(CGRect)frame;

@@ -66,7 +66,7 @@
     CGFloat w = [UIScreen mainScreen].bounds.size.width;
     
     self.inputAccessoryView = [[LYKeyboardAccessoryView alloc] init];
-    self.keyboard = [[LYKeyboardInputView alloc] initWithFrame:CGRectMake(x, y, w, h) letterIsOrder:self.letterIsOrder symbolIsOrder:self.symbolIsOrder];
+    self.keyboard = [[LYKeyboardInputView alloc] initWithFrame:CGRectMake(x, y, w, h) letterIsOrder:self.letterIsOrder symbolIsOrder:self.symbolIsOrder safeKeyboardType:self.safeKeyboardType];
     self.keyboard.delegate = self;
     self.inputView = self.keyboard;
     

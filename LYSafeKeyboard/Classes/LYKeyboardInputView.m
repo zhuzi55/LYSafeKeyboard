@@ -67,12 +67,13 @@
 //    }
 //    return self;
 //}
-- (instancetype)initWithFrame:(CGRect)frame letterIsOrder:(BOOL)letterIsOrder symbolIsOrder:(BOOL)symbolIsOrder{
+- (instancetype)initWithFrame:(CGRect)frame letterIsOrder:(BOOL)letterIsOrder symbolIsOrder:(BOOL)symbolIsOrder safeKeyboardType:(LYSafeKeyboardType)safeKeyboardType{
     self = [super initWithFrame:frame];
     if (self) {
         self.shiftChange = YES;
         self.letterIsOrder = letterIsOrder;
         self.symbolIsOrder = symbolIsOrder;
+        self.safeKeyboardType = safeKeyboardType;
         [self imagepp];
         self.backgroundColor = [UIColor colorWithRed:(222)/255.0 green:(222)/255.0 blue:(222)/255.0 alpha:1.0];
     }
@@ -80,9 +81,16 @@
 }
 - (void)imagepp{
     
-    [self setupTopButtonsWithImage:[self nomImage:YES] highImage:[self nomImage:NO] isLowercase:YES];
-    [self setupBottomButtonsWithImage:[self nomImage:NO] highImage:[self nomImage:YES]];
-    [self layoutSubviewst];
+    if (self.safeKeyboardType == LYSafeKeyboardTypeIDCard){
+        //身份证按钮
+        [self setupIDCardButtonsWithImage:[self nomImage:YES] highImage:[self nomImage:NO]];
+        [self setupBottomIDCardButtonWithImage:[self nomImage:NO] highImage:[self nomImage:YES]];
+        [self layoutIDcardNumber];
+    } else {
+        [self setupTopButtonsWithImage:[self nomImage:YES] highImage:[self nomImage:NO] isLowercase:YES];
+        [self setupBottomButtonsWithImage:[self nomImage:NO] highImage:[self nomImage:YES]];
+        [self layoutSubviewst];
+    }
     
 }
 
@@ -100,6 +108,100 @@
     }
 }
 
+#pragma mark - 身份证按钮
+- (void)setupIDCardButtonsWithImage:(UIImage *)image highImage:(UIImage *)highImage {
+    // 删除重新布局
+    for(id temp in self.subviews)
+    {
+        if([temp respondsToSelector:@selector(setTitle:forState:)])
+        {//判断这个里面的子视图是否是按钮
+            [temp removeFromSuperview];
+        }
+    }
+    
+    NSArray *arrM = @[@"0",@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9",@"X"];
+    
+    for (int i = 0; i < 11; i++) {
+        UIButton *numBtn = [[UIButton alloc] init];
+        NSString *title = arrM[i];
+        [numBtn setTitle:title forState:UIControlStateNormal];
+        [numBtn setBackgroundImage:[LYKeyboardTool getImageWithResouce:@"symbolKeyboardButtonBgNor.png"] forState:UIControlStateNormal];
+        [numBtn setBackgroundImage:[LYKeyboardTool getImageWithResouce:@"symbolKeyboardButtonBgSelect@2x.png"] forState:UIControlStateHighlighted];
+        numBtn.titleLabel.font = [UIFont systemFontOfSize:SMYKeyboardTextFont];
+        [numBtn setTitleColor:[UIColor colorWithRed:51/255.0 green:51/255.0 blue:51/255.0 alpha:1.0] forState:UIControlStateNormal];
+        [numBtn addTarget:self action:@selector(numBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+        
+        [self addSubview:numBtn];
+    }
+    
+}
+- (void)setupBottomIDCardButtonWithImage:(UIImage *)image highImage:(UIImage *)highImage{
+    // 删除按钮
+    self.deleteBtn = [self setupBottomButtonWithTitle:nil image:image];
+    [self.deleteBtn setImage:[LYKeyboardTool getImageWithResouce:@"keyboard_delete@2x.png"] forState:UIControlStateNormal];
+    [self.deleteBtn setImage:[LYKeyboardTool getImageWithResouce:@"keyboard_delete@2x.png"] forState:UIControlStateHighlighted];
+    self.deleteBtn.contentMode = UIViewContentModeCenter;
+    [self.deleteBtn addTarget:self action:@selector(deleteBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+}
+- (void)layoutIDcardNumber{
+    
+    CGFloat topMargin = 10;
+    CGFloat bottomMargin = 3;
+    CGFloat leftMargin = 3;
+    CGFloat colMargin = 5;
+    CGFloat rowMargin = 3;
+    
+    CGFloat topBtnW = (self.width - 2 * leftMargin - 2 * colMargin) / 3;
+    CGFloat topBtnH = (216 - topMargin - bottomMargin - 3 * rowMargin) / 4;
+    
+    NSUInteger count = self.subviews.count;
+    
+    // 布局数字按钮
+    for (NSUInteger i = 0; i < count; i++) {
+        if (i == 0 ) { // 0
+            UIButton *buttonZero = self.subviews[i];
+            buttonZero.height = topBtnH;
+            buttonZero.width = topBtnW;
+            buttonZero.centerX = self.centerX;
+            buttonZero.centerY = 216 - bottomMargin - buttonZero.height * 0.5;
+
+            // 符号、文字及删除按钮的位置
+            self.deleteBtn.x = CGRectGetMaxX(buttonZero.frame) + colMargin;
+            self.deleteBtn.y = buttonZero.y;
+            self.deleteBtn.width = buttonZero.width;
+            self.deleteBtn.height = buttonZero.height;
+
+            self.textBtn.x = leftMargin;
+            self.textBtn.y = buttonZero.y;
+            self.textBtn.width = buttonZero.width / 2 - colMargin / 2;
+            self.textBtn.height = buttonZero.height;
+
+            self.symbolBtn.x = CGRectGetMaxX(self.textBtn.frame) + colMargin;
+            self.symbolBtn.y = buttonZero.y;
+            self.symbolBtn.width = self.textBtn.width;
+            self.symbolBtn.height = buttonZero.height;
+
+            UIButton *buttonX = self.subviews[10];
+            buttonX.x = leftMargin;
+            buttonX.y = topMargin + 3 * (topBtnH + rowMargin);
+            buttonX.height = topBtnH;
+            buttonX.width = topBtnW;
+            
+        }
+        if (i > 0 && i < 10) { // 0 ~ 9
+            
+            UIButton *topButton = self.subviews[i];
+            CGFloat row = (i - 1) / 3;
+            CGFloat col = (i - 1) % 3;
+            
+            topButton.x = leftMargin + col * (topBtnW + colMargin);
+            topButton.y = topMargin + row * (topBtnH + rowMargin);
+            topButton.width = topBtnW;
+            topButton.height = topBtnH;
+        }
+        
+    }
+}
 
 #pragma mark - 数字按钮
 - (void)setupTopNumButtonsWithImage:(UIImage *)image highImage:(UIImage *)highImage {
@@ -248,7 +350,6 @@
     self.shiftChange = NO;
     
 }
-
 
 #pragma mark - 删除按钮可以点
 - (void)setupBottomButtonsWithImage:(UIImage *)image highImage:(UIImage *)highImage {

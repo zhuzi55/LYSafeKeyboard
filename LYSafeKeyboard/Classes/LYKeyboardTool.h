@@ -9,6 +9,12 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef NS_ENUM(NSInteger,LYSafeKeyboardType) {
+    LYSafeKeyboardTypeDefault = 0, //默认
+    LYSafeKeyboardTypeIDCard = 1,  //身份正类型（带X）
+};
+
+
 @interface LYKeyboardTool : NSObject
 
 + (UIImage *)getImageWithResouce:(NSString *)resouce;

@@ -1,6 +1,8 @@
 
 ## 效果图
-![效果图](assets/%E6%95%88%E6%9E%9C%E5%9B%BE.gif)
+![效果图](assets/%E6%95%88%E6%9E%9C%E5%9B%BE.gif)!
+[身份证键盘](assets/WechatIMG725.png)
+
 
 
 ## 使用方式
@@ -8,7 +10,7 @@
 可以通过pod导入，也可以下载demo后把LYSafeKeyboard文件夹导入。
 
 ```
-pod 'LYSafeKeyboard', '~> 0.0.3'
+pod 'LYSafeKeyboard', '~> 0.0.4'
 ```
 
 ```
@@ -25,6 +27,8 @@ LYSafeTextField *tf = [[LYSafeTextField alloc] initWithFrame:CGRectMake(0, 0, 30
 tf.center = self.view.center;
 tf.backgroundColor = [UIColor whiteColor];
 tf.safeDelegate = self;
+//如果需要使用身份证输入键盘
+//tf.safeKeyboardType = LYSafeKeyboardTypeIDCard;
 [self.view addSubview:tf];
     
 #pragma mark - 输入框回调事件
